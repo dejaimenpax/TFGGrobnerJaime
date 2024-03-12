@@ -1,9 +1,10 @@
 # main.py
 from polynomial import Polynomial
 
+
 def main():
 
-    ##EJEMPLO 3-COLOREADO
+    # EJEMPLO 3-COLOREADO
     p_ejemplo = Polynomial("abcde", "a^3-3a^2+2a")
 
     grafo_ejemplo = [
@@ -26,15 +27,12 @@ def main():
         print(p.read_polynomial())
     '''
 
-    
     reduced_ejemplo = p_ejemplo.reduce_grobner(grafo_ejemplo)
     print("\nReduced Grobner basis:")
     for p in reduced_ejemplo:
         print(p.read_polynomial())
-    
 
-
-    ## EJEMPLO 2-COLOREADO
+    # EJEMPLO 2-COLOREADO
     p_2coloreado = Polynomial("abcde", "a^2 - a")
 
     grafo_2coloreado = [
@@ -50,17 +48,18 @@ def main():
         Polynomial("abcde", "d + e - 1"),
     ]
 
-    calculated_grobner_2coloreado = p_2coloreado.calculate_grobner_bases(grafo_2coloreado)
+    calculated_grobner_2coloreado = p_2coloreado.calculate_grobner_bases(
+        grafo_2coloreado)
     print("\nGrobner basis:")
     for p in calculated_grobner_2coloreado:
         print(p.read_polynomial())
 
-    reduced_2coloreado = p_2coloreado.reduce_grobner(calculated_grobner_2coloreado)
+    reduced_2coloreado = p_2coloreado.reduce_grobner(
+        calculated_grobner_2coloreado)
     print("\nReduced Grobner basis:")
     for p in reduced_2coloreado:
         print(p.read_polynomial())
 
-    
 
 if __name__ == "__main__":
     main()

@@ -82,9 +82,10 @@ class Polynomial:
             terms_equal = False
             for m1 in unique_monomials.copy():
                 for m2 in unique_monomials.copy():
-                    if m1 != m2 and m1.m_exp==m2.m_exp:
+                    if m1 != m2 and m1.m_exp == m2.m_exp:
                         # Sumar los coeficientes de los monomios sin cambiar el signo
-                        sum_coefficient = [m1.coefficient[0] + m2.coefficient[0], m1.coefficient[1]]
+                        sum_coefficient = [m1.coefficient[0] +
+                                           m2.coefficient[0], m1.coefficient[1]]
                         sum_monomial = Monomial(sum_coefficient, m1.m_exp)
                         unique_monomials.remove(m1)
                         unique_monomials.remove(m2)
@@ -95,7 +96,8 @@ class Polynomial:
                     break
 
         # Eliminar los monomios con coeficiente cero
-        unique_monomials = {m for m in unique_monomials if m.coefficient[0] != 0 or not m.m_exp}
+        unique_monomials = {
+            m for m in unique_monomials if m.coefficient[0] != 0 or not m.m_exp}
         self.monomials = list(unique_monomials)
 
         # Ordenar los monomios según el orden lexicográfico
@@ -132,7 +134,7 @@ class Polynomial:
                 sb.append(" " + m.read_monomial())
                 first_term = False
         return ''.join(sb)
-    
+
     def add_polynomial(self, p):
         self.simplify()
         p.simplify()
@@ -282,13 +284,15 @@ class Polynomial:
 
                 for monomial in division_sub_p.monomials:
                     monomial.coefficient[0] *= -1
-                division_sub_p = division_sub_p.multiply_polynomials(array_polynomials[i])
+                division_sub_p = division_sub_p.multiply_polynomials(
+                    array_polynomials[i])
                 h = h.add_polynomial(division_sub_p)
             else:
                 r = r.add_polynomial(lt_p)
                 _monomials = []
                 for monomial in lt_p.monomials:
-                    coef = [monomial.coefficient[0] * -1, monomial.coefficient[1]]
+                    coef = [monomial.coefficient[0]
+                            * -1, monomial.coefficient[1]]
                     m = Monomial(coef, monomial.m_exp)
                     _monomials.append(m)
                 subtraction = Polynomial(_monomials)
@@ -347,7 +351,7 @@ class Polynomial:
         while G_pairs:
             print()
             print("STEP", counter)
-            
+
             print(len(G_pairs))
             counter += 1
 
@@ -392,7 +396,7 @@ class Polynomial:
             R.pop(0)
 
             print()
-            print("Iteration "+ str(i))
+            print("Iteration " + str(i))
             print("Removed polynomial:", g.read_polynomial())
             print()
             print("H:")
@@ -410,7 +414,7 @@ class Polynomial:
                 print("Remainder:", remainder.read_polynomial())
 
                 if not H and not R:  # Verificar si H y R están vacíos
-                    return [Polynomial([Monomial([1,1],[0])])]
+                    return [Polynomial([Monomial([1, 1], [0])])]
 
                 lc_double = remainder.lc_polynomial()
                 for m in remainder.monomials:
